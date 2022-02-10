@@ -37,7 +37,7 @@ function lucasNumber(n) {
 // sumArray([4, 10, -1, 2]) // => 15
 function sumArray(array) {
     if (array.length === 0) return 0;
-    
+
     return sumArray(array.slice(1)) + array[0]
 }
 
@@ -168,6 +168,28 @@ function flatten(data) {
 // fileFinder(desktop, 'everlong.flac');            // => true
 // fileFinder(desktop, 'sequoia.jpeg');             // => false
 function fileFinder(directories, targetFile) {
+    // const keys = Object.keys(directories)
+    // console.log(keys)
+
+    // keys.forEach(key => {
+    //     // console.log(key)
+    //     console.log(directories[key])
+    //     if (key === targetFile || fileFinder(directories[key], targetFile) === true) {
+    //         return true
+    //     } 
+    // })
+
+    for(let directory in directories) {
+        // if (directory) {
+            if (directory === targetFile || fileFinder(directories[directory], targetFile) === true) {
+                return true
+            }
+        // }
+
+    }
+
+    return false
+    
 
 }
 
@@ -183,6 +205,19 @@ function fileFinder(directories, targetFile) {
 // pathFinder(desktop, 'honeybadger.png'));     // => null
 function pathFinder(directories, targetFile) {
 
+    for (let directory in directories) {
+        if (directory === targetFile) {
+            return '/' + directory;
+        }
+
+        path = pathFinder(directories[directory], targetFile)
+
+        if (path !== null) {
+            return directory + path
+        }
+    }
+
+    return null
 }
 
 
